@@ -27,9 +27,9 @@ jobs:
         run: |
           mkdir -p ./src/main/resources 
           cd ./src/main/resources
-          touch ./application.yml
+          touch application.yml
           
-          echo "${{ secrets.DATABASE_PROPERTIES }}" >> ./application.yml
+          echo "${{ secrets.DATABASE_PROPERTIES }}" >> application.yml
         shell: bash
 
       - name: Setup MySQL
