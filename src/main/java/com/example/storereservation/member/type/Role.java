@@ -10,6 +10,6 @@ public enum Role {
     GENERAL("ROLE_GENERAL"),
     STORE("ROLE_STORE");
 
-    private String value;
+    private final String value;
 
 }

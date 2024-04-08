@@ -10,6 +10,6 @@ public enum MemberState {
     REGISTERED("등록"),
     UNREGISTERED("탈퇴");
 
-    private String title;
+    private final String title;
 
 }

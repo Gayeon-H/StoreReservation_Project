@@ -40,10 +40,7 @@ public class MemberService {
     }
 
     private boolean duplicatedMember(JoinDto joinDto) {
-        if (memberRepository.existsById(joinDto.getId())) {
-            return true;
-        }
-        return false;
+        return memberRepository.existsById(joinDto.getId());
     }
 
     public MemberInfoDto getMemberInfo(Long memberId, String password) {
