@@ -1,7 +1,6 @@
 package com.example.storereservation.config;
 
 import com.example.storereservation.config.security.JwtAuthenticationFilter;
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
