@@ -5,13 +5,13 @@ import com.example.storereservation.member.type.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterRequest {
