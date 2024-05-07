@@ -25,14 +25,6 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authManager;
 
-    public Member registerMember(RegisterRequest request, Role role) {
-        memberService.checkDuplicatedId(request.getUserId());
-        Member member = request.convertToMember(passwordEncoder, role);
-        memberService.addMember(member);
-
-        return member;
-    }
-
     public AuthenticationResponse registerGeneral(RegisterRequest request) {
         Member member = registerMember(request, Role.GENERAL);
         String jwtToken = jwtService.generateToken(member);
@@ -65,6 +57,13 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    private Member registerMember(RegisterRequest request, Role role) {
+        memberService.checkDuplicatedId(request.getUserId());
+        Member member = request.convertToMember(passwordEncoder, role);
+
+        return memberService.addMember(member);
     }
 
 }

@@ -13,9 +13,10 @@ public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
 
     @Override
-    public void registerStore(Long memberId, RegisterStoreRequest request) {
+    public Store registerStore(Long memberId, RegisterStoreRequest request) {
         Store store = request.convertToStore(memberId);
-        storeRepository.save(store);
+
+        return storeRepository.save(store);
     }
 
 }

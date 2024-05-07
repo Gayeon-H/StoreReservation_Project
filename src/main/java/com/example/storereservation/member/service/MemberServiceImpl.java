@@ -12,8 +12,8 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     @Override
-    public void addMember(Member member) {
-        memberRepository.save(member);
+    public Member addMember(Member member) {
+        return memberRepository.save(member);
     }
 
     @Override
@@ -23,10 +23,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void checkDuplicatedId(String userId) {
+    public boolean checkDuplicatedId(String userId) {
         if (memberRepository.existsByUserId(userId)) {
             throw new RuntimeException("중복되는 아이디입니다.");
         }
+
+        return true;
     }
 
 }

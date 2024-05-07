@@ -4,10 +4,10 @@ import com.example.storereservation.member.entity.Member;
 
 public interface MemberService {
 
-    void addMember(Member member);
+    Member addMember(Member member);
 
     Member findMember(String userId);
 
-    void checkDuplicatedId(String userId);
+    boolean checkDuplicatedId(String userId);
 
 }
