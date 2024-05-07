@@ -14,8 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,7 +24,7 @@ class MemberServiceTest {
     private MemberServiceImpl memberService;
     @Mock
     private MemberRepository memberRepository;
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @DisplayName("멤버 추가")
     @Test
@@ -79,7 +78,7 @@ class MemberServiceTest {
         boolean result = memberService.checkDuplicatedId("test");
 
         // then
-        assertEquals(result, true);
+        assertTrue(result);
         verify(memberRepository, times(1)).existsByUserId("test");
     }
 
@@ -87,7 +86,6 @@ class MemberServiceTest {
     @Test
     void checkDuplicatedId_exception() {
         // given
-        Member entity = memberEntity();
         when(memberRepository.existsByUserId("testId")).thenReturn(true);
 
         // when
