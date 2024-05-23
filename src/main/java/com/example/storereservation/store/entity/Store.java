@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @Setter
@@ -23,7 +21,5 @@ public class Store {
     @Builder.Default
     private double starRating = 0.0;
     private String contents;
-    private LocalDateTime regDate;
-    private LocalDateTime updateDate;
 
 }

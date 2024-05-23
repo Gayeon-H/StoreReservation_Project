@@ -5,6 +5,7 @@ import com.example.storereservation.auth.dto.AuthenticationResponse;
 import com.example.storereservation.auth.dto.RegisterRequest;
 import com.example.storereservation.auth.dto.RegisterStoreRequest;
 import com.example.storereservation.auth.service.AuthenticationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,17 +21,17 @@ public class AuthenticationController {
     private final AuthenticationService authService;
 
     @PostMapping("/register/general")
-    public ResponseEntity<AuthenticationResponse> registerGeneral(@RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthenticationResponse> registerGeneral(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.registerGeneral(request));
     }
 
     @PostMapping("/register/store")
-    public ResponseEntity<AuthenticationResponse> registerStore(@RequestBody RegisterStoreRequest request) {
+    public ResponseEntity<AuthenticationResponse> registerStore(@Valid @RequestBody RegisterStoreRequest request) {
         return ResponseEntity.ok(authService.registerStore(request));
     }
 
-    @PostMapping("/auth")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(authService.authenticate(request));
     }
 
