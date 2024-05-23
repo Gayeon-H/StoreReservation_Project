@@ -1,5 +1,6 @@
 package com.example.storereservation.member.service;
 
+import com.example.storereservation.common.exception.CustomRuntimeException;
 import com.example.storereservation.member.entity.Member;
 import com.example.storereservation.member.repository.MemberRepository;
 import com.example.storereservation.member.type.Role;
@@ -65,7 +66,10 @@ class MemberServiceTest {
 
         // when
         // then
-        assertThrows(RuntimeException.class, () -> memberService.findMember("testId"));
+        assertThrows(CustomRuntimeException.class,
+                () -> memberService.findMember("testId"),
+                "유저를 찾을 수 없습니다."
+        );
     }
 
     @DisplayName("중복 아이디 체크")
@@ -90,7 +94,9 @@ class MemberServiceTest {
 
         // when
         // then
-        assertThrows(RuntimeException.class, () -> memberService.checkDuplicatedId("testId"));
+        assertThrows(CustomRuntimeException.class,
+                () -> memberService.checkDuplicatedId("testId"),
+                "중복된 아이디입니다.");
     }
 
     private Member member() {
