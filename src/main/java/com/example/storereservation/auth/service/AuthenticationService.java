@@ -4,14 +4,14 @@ import com.example.storereservation.auth.dto.AuthenticationRequest;
 import com.example.storereservation.auth.dto.AuthenticationResponse;
 import com.example.storereservation.auth.dto.RegisterRequest;
 import com.example.storereservation.auth.dto.RegisterStoreRequest;
+import com.example.storereservation.common.exception.CustomRuntimeException;
+import com.example.storereservation.common.exception.ErrorCode;
 import com.example.storereservation.config.security.JwtService;
 import com.example.storereservation.member.entity.Member;
 import com.example.storereservation.member.service.MemberService;
 import com.example.storereservation.member.type.Role;
 import com.example.storereservation.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,6 @@ public class AuthenticationService {
     private final StoreService storeService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final AuthenticationManager authManager;
 
     public AuthenticationResponse registerGeneral(RegisterRequest request) {
         Member member = registerMember(request, Role.GENERAL);
@@ -46,12 +45,11 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         Member member = memberService.findMember(request.getUserId());
-        authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUserId(),
-                        request.getPassword()
-                )
-        );
+        if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
+            throw new CustomRuntimeException(
+                    ErrorCode.NOT_FOUND_MEMBER, "아이디 또는 비밀번호가 잘못 입력되었습니다."
+            );
+        }
         String jwtToken = jwtService.generateToken(member);
 
         return AuthenticationResponse.builder()
