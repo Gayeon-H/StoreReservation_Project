@@ -32,12 +32,12 @@ jobs:
           echo "${{ secrets.APPLICAION_YML }}" >> application.yml
         shell: bash
 
-      - name: Setup MySQL
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql database: 'reservation' 
-          mysql user: ${{ secrets.MYSQL_USERNAME }}
-          mysql password: ${{ secrets.MYSQL_PASSWORD }}
+      # - name: Setup MySQL
+      #   uses: mirromutth/mysql-action@v1.1
+      #   with:
+      #     mysql database: 'reservation' 
+      #     mysql user: ${{ secrets.MYSQL_USERNAME }}
+      #     mysql password: ${{ secrets.MYSQL_PASSWORD }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
